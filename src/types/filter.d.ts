@@ -20,4 +20,5 @@ export interface TodoListProps {
 /** 📌 `FilteredTodos` 반환 타입 */
 export interface FilteredTodos {
   filteredTodos: Todo[];
+  count: number;
 }
