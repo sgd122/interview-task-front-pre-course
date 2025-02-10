@@ -35,15 +35,20 @@ const TodoUserListPage = () => {
       <TodoInput />
       <ListContainer>
         <TodoFilter>
-          {FILTER_OPTIONS.map(({ label, value }) => (
-            <FilterButton
-              key={value}
-              active={filter === value}
-              onClick={() => setFilter(value)}
-            >
-              {label}
-            </FilterButton>
-          ))}
+          {FILTER_OPTIONS.map(({ label, value }) => {
+            return (
+              <>
+                {filter === value && <h2 className="sr-only">{value}</h2>}
+                <FilterButton
+                  key={value}
+                  active={filter === value}
+                  onClick={() => setFilter(value)}
+                >
+                  {label}
+                </FilterButton>
+              </>
+            );
+          })}
         </TodoFilter>
         <TodoList filter={filter} />
       </ListContainer>

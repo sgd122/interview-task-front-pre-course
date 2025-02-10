@@ -22,7 +22,7 @@ export const CheckboxButton = styled.button<{ completed: boolean }>`
 `;
 
 /** 📌 `Text` (할 일 텍스트) */
-export const Text = styled.p<{ completed: boolean }>`
+export const Text = styled.h3<{ completed: boolean }>`
   flex: 1;
   color: ${({ completed }) => (completed ? theme.palette.textDone : theme.palette.black)};
 `;
