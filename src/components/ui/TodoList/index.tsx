@@ -26,7 +26,7 @@ const TodoListContainer = ({ filter }: TodoListProps) => {
   const hasTodos = count > 0;
 
   return (
-    <div>
+    <div data-testid="todo-list">
       <CountText>총 {count}개</CountText>
 
       {!hasTodos ? (

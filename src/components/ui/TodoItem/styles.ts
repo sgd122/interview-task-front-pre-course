@@ -11,7 +11,7 @@ export const ItemContainer = styled.li`
 `;
 
 /** 📌 `Checkbox` (완료 체크버튼 - Check SVG로 대체됨) */
-export const CheckboxButton = styled.button<{ completed: boolean }>`
+export const CheckboxButton = styled.div<{ completed: boolean }>`
   width: 32px;
   height: 32px;
   border: 1px solid ${theme.palette.inputBackground};
@@ -19,6 +19,9 @@ export const CheckboxButton = styled.button<{ completed: boolean }>`
   cursor: pointer;
   margin-right: 16px;
   background-color: ${({ completed }) => (completed ? theme.palette.blue : theme.palette.white)};
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 /** 📌 `Text` (할 일 텍스트) */

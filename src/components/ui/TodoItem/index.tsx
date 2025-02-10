@@ -32,17 +32,25 @@ const TodoItem = ({ todo }: TodoItemProps) => {
   const { toggleComplete, removeTodo } = useTodoItem(todo);
 
   return (
-    <ItemContainer>
-      {/* ✅ Check 버튼으로 완료 상태 변경 */}
-      <CheckboxButton onClick={toggleComplete} completed={todo.completed}>
-        <CheckIcon size={24} color={theme.palette.white} />
-      </CheckboxButton>
+    <ItemContainer role="list-item">
+      <label>
+        <input
+          type="checkbox"
+          aria-label="check"
+          checked={todo.completed}
+          onChange={toggleComplete}
+          style={{ display: 'none' }} // ✅ `input`을 숨김
+        />
+        <CheckboxButton completed={todo.completed}>
+          <CheckIcon size={24} color={theme.palette.white} />
+        </CheckboxButton>
+      </label>
 
       {/* ✅ 할 일 텍스트 */}
       <Text completed={todo.completed}>{todo.text}</Text>
 
       {/* ✅ Close 버튼으로 할 일 삭제 */}
-      <DeleteButton onClick={removeTodo}>
+      <DeleteButton aria-label="delete" onClick={removeTodo}>
         <CloseIcon size={24} color={theme.palette.textPlaceholder} />
       </DeleteButton>
     </ItemContainer>
