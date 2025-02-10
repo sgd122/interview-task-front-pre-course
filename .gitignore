@@ -18,3 +18,5 @@ next-env.d.ts
 
 # macOS DSStore
 .DS_Store
+
+coverage
