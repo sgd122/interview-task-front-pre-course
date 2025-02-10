@@ -32,7 +32,11 @@ const TodoListContainer = ({ filter }: TodoListProps) => {
       {!hasTodos ? (
         <EmptyText>목록이 존재하지 않습니다.</EmptyText>
       ) : (
-        filteredTodos.map((todo) => <TodoItem key={todo.id} todo={todo} />)
+        <ul>
+          {filteredTodos.map((todo) => (
+            <TodoItem key={todo.id} todo={todo} />
+          ))}
+        </ul>
       )}
     </div>
   );

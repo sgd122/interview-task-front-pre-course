@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { theme } from '@/styles/theme';
 
 /** 📌 `ItemContainer` (할 일 아이템을 감싸는 컨테이너) */
-export const ItemContainer = styled.div`
+export const ItemContainer = styled.li`
   display: flex;
   align-items: center;
   justify-content: space-between;
