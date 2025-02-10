@@ -38,6 +38,7 @@ const styles = (theme: Theme) => css`
 
   a, input, textarea, button {
     font-family: inherit;
+    padding: 0;
   }
 
   strong, b {
