@@ -1,4 +1,6 @@
-const palette = {
+import type { Theme } from '@emotion/react';
+
+const palette: Theme['palette'] = {
   white: '#FFFFFF',
   black: '#000000',
   inputBackground: '#E5E5E5',
@@ -9,7 +11,7 @@ const palette = {
   selectedBlue: '#EBF4FF',
 };
 
-const typography = {
+const typography: Theme['typography'] = {
   title1: {
     fontFamily: 'Pretendard',
     fontStyle: 'normal',

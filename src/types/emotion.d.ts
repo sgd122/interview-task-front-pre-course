@@ -7,7 +7,8 @@ type palette =
   | 'textBold'
   | 'textPlaceholder'
   | 'textDone'
-  | 'blue';
+  | 'blue'
+  | 'selectedBlue';
 
 type typography =
   | 'title1'
@@ -26,11 +27,11 @@ declare module '@emotion/react' {
     };
     typography: {
       [key in typography]: {
-        fontFamily: string;
-        fontStyle: string;
-        fontWeight: number;
-        fontSize: string;
-        lineHeight: string;
+        fontFamily?: string;
+        fontStyle?: string;
+        fontWeight?: number;
+        fontSize?: string;
+        lineHeight?: string;
       };
     };
   }

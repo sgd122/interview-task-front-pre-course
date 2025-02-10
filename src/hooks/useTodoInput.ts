@@ -2,6 +2,7 @@ import { useCallback, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { todoListState } from '@/states/todoState';
+import { updateServerTodos } from '@/utils/client/updateServerTodos';
 
 const MAX_LENGTH = 20;
 const MAX_UNDONE_TODOS = 10; // ✅ 미완료 할 일 최대 개수
@@ -51,11 +52,11 @@ export const useTodoInput = (maxLength: number = MAX_LENGTH) => {
       return;
     }
 
-    setTodoList((prev) => [
-      ...prev,
-      { id: Date.now(), text, completed: false },
-    ]);
+    const newTodos = [...todoList, { id: Date.now(), text, completed: false }];
+    setTodoList(newTodos);
     setText('');
+
+    updateServerTodos(newTodos);
   }, [text, setTodoList, canAddTodo]);
 
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {

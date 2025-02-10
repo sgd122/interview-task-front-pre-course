@@ -1,6 +1,6 @@
 import TodoUserListPage from '@/components/pages/TodoUserListPage';
 
-const Page = () => {
+const Page = async () => {
   return <TodoUserListPage />;
 };
 

@@ -3,6 +3,7 @@ import { useSetRecoilState } from 'recoil';
 
 import { todoListState } from '@/states/todoState';
 import type { Todo } from '@/types/todo';
+import { updateServerTodos } from '@/utils/client/updateServerTodos';
 
 /**
  * 📌 `useTodoItem` 커스텀 훅
@@ -30,7 +31,11 @@ export const useTodoItem = ({ id, completed }: Todo) => {
   }, [id, completed]);
 
   const removeTodo = useCallback(() => {
-    setTodoList((prev) => prev.filter((t) => t.id !== id));
+    setTodoList((prev) => {
+      const newTodos = prev.filter((t) => t.id !== id); // ✅ newTodos 생성
+      updateServerTodos(newTodos); // ✅ 서버 업데이트
+      return newTodos;
+    });
   }, [id]);
 
   return { toggleComplete, removeTodo };

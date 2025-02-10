@@ -1,14 +1,16 @@
 import Head from 'next/head';
 import type React from 'react';
 
-import { LayoutRoot } from '@/components/layout';
+import { LayoutRecoil, LayoutRoot } from '@/components/layout';
+import { getTodos } from '@/utils/server/getTodos';
 
 export const metadata = {
   title: 'myfair front pre-course',
   description: 'todolist',
 };
 
-const RootLayout = ({ children }: { children: React.ReactNode }) => {
+const RootLayout = async ({ children }: { children: React.ReactNode }) => {
+  const initialTodos = await getTodos();
   return (
     <html lang="en">
       <Head>
@@ -18,7 +20,9 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         />
       </Head>
       <body>
-        <LayoutRoot>{children}</LayoutRoot>
+        <LayoutRecoil initialTodos={initialTodos}>
+          <LayoutRoot>{children}</LayoutRoot>
+        </LayoutRecoil>
       </body>
     </html>
   );
