@@ -15,4 +15,7 @@ export const Input = styled.input`
   outline: none;
   background: transparent;
   ${theme.typography.body1}
+  &::placeholder {
+    color: ${theme.palette.textPlaceholder};
+  }
 `;
