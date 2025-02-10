@@ -1,6 +1,6 @@
 'use client';
 
-import { CountText, ListContainer } from './styles';
+import { CountText } from './styles';
 
 import TodoItem from '@/components/ui/TodoItem';
 import { useFilteredTodos } from '@/hooks/useFilteredTodos';
@@ -23,13 +23,13 @@ const TodoListContainer = ({ filter }: TodoListProps) => {
   const { filteredTodos } = useFilteredTodos({ filter });
 
   return (
-    <ListContainer>
+    <div>
       <CountText>총 {filteredTodos.length}개</CountText>
 
       {filteredTodos.map((todo) => (
         <TodoItem key={todo.id} todo={todo} />
       ))}
-    </ListContainer>
+    </div>
   );
 };
 

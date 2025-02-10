@@ -6,6 +6,7 @@ const palette = {
   textPlaceholder: '#B9B9B9',
   textDone: '#868686',
   blue: '#2182F3',
+  selectedBlue: '#EBF4FF',
 };
 
 const typography = {
