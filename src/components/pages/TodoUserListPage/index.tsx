@@ -1,5 +1,7 @@
 'use client';
 
+import React from 'react';
+
 import { Container, FilterButton, ListContainer, TodoFilter } from './styles';
 
 import TodoInput from '@/components/ui/TodoInput';
@@ -37,16 +39,20 @@ const TodoUserListPage = () => {
         <TodoFilter>
           {FILTER_OPTIONS.map(({ label, value }) => {
             return (
-              <>
-                {filter === value && <h2 className="sr-only">{value}</h2>}
+              <React.Fragment key={value}>
+                {filter === value && (
+                  <h2 key={`${value}-heading`} className="sr-only">
+                    {value}
+                  </h2>
+                )}
                 <FilterButton
-                  key={value}
+                  key={`${value}-button`}
                   active={filter === value}
                   onClick={() => setFilter(value)}
                 >
                   {label}
                 </FilterButton>
-              </>
+              </React.Fragment>
             );
           })}
         </TodoFilter>
