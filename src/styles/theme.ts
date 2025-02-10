@@ -13,7 +13,7 @@ const palette: Theme['palette'] = {
 
 const typography: Theme['typography'] = {
   title1: {
-    fontFamily: 'Pretendard',
+    fontFamily: 'var(--font-pretendard)',
     fontStyle: 'normal',
     fontWeight: 700,
     fontSize: '56px',
@@ -22,19 +22,19 @@ const typography: Theme['typography'] = {
   title2: {},
   title3: {},
   body1: {
-    fontFamily: 'Pretendard',
+    fontFamily: 'var(--font-pretendard)',
     fontStyle: 'normal',
     fontSize: '20px',
     lineHeight: '28px',
   },
   body2: {
-    fontFamily: 'Pretendard',
+    fontFamily: 'var(--font-pretendard)',
     fontStyle: 'normal',
     fontSize: '16px',
     lineHeight: '24px',
   },
   'body2-bold': {
-    fontFamily: 'Pretendard',
+    fontFamily: 'var(--font-pretendard)',
     fontStyle: 'normal',
     fontWeight: 600,
     fontSize: '16px',

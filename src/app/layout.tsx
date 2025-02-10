@@ -1,4 +1,4 @@
-import Head from 'next/head';
+import localFont from 'next/font/local';
 import type React from 'react';
 
 import { LayoutRecoil, LayoutRoot } from '@/components/layout';
@@ -9,16 +9,16 @@ export const metadata = {
   description: 'todolist',
 };
 
+const pretendard = localFont({
+  src: '../styles/fonts/PretendardVariable.woff2',
+  display: 'swap',
+  variable: '--font-pretendard',
+});
+
 const RootLayout = async ({ children }: { children: React.ReactNode }) => {
   const initialTodos = await getTodos();
   return (
-    <html lang="en">
-      <Head>
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/pretendard/dist/web/static/pretendard.css"
-        />
-      </Head>
+    <html lang="en" className={`${pretendard.variable}`}>
       <body>
         <LayoutRecoil initialTodos={initialTodos}>
           <LayoutRoot>{children}</LayoutRoot>

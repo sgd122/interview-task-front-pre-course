@@ -27,6 +27,7 @@ export const CheckboxButton = styled.div<{ completed: boolean }>`
 /** 📌 `Text` (할 일 텍스트) */
 export const Text = styled.h3<{ completed: boolean }>`
   flex: 1;
+  ${theme.typography.body1};
   color: ${({ completed }) => (completed ? theme.palette.textDone : theme.palette.black)};
 `;
 

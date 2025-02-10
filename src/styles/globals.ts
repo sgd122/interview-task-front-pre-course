@@ -14,12 +14,8 @@ const styles = (theme: Theme) => css`
     -webkit-font-smoothing: antialiased;
   }
 
-  html, body, #__next { 
-    height: 100%;
-  }
-
   body {
-    font-family: Pretendard, Malgun Gothic, Helvetica Neue, sans-serif;
+    font-family: 'var(--font-pretendard)', Malgun Gothic, Helvetica Neue, sans-serif;
     background-color: #F6F6F6;
   }
 
