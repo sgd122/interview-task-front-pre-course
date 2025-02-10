@@ -25,15 +25,28 @@ export const useTodoItem = ({ id, completed }: Todo) => {
   const setTodoList = useSetRecoilState(todoListState);
 
   const toggleComplete = useCallback(() => {
-    setTodoList((prev) =>
-      prev.map((t) => (t.id === id ? { ...t, completed: !completed } : t))
-    );
+    setTodoList((prev) => {
+      const newTodos = prev.map((t) =>
+        t.id === id ? { ...t, completed: !completed } : t
+      );
+
+      const undoneCount = newTodos.filter((todo) => !todo.completed).length;
+
+      // ✅ 완료 → 미완료 변경 시 개수 제한 적용
+      if (completed && undoneCount > 10) {
+        alert('처리가 안된 할 일은 최대 10개까지만 유지할 수 있습니다.');
+        return prev; // 변경 취소
+      }
+
+      updateServerTodos(newTodos); // ✅ 서버 업데이트
+      return newTodos;
+    });
   }, [id, completed]);
 
   const removeTodo = useCallback(() => {
     setTodoList((prev) => {
-      const newTodos = prev.filter((t) => t.id !== id); // ✅ newTodos 생성
-      updateServerTodos(newTodos); // ✅ 서버 업데이트
+      const newTodos = prev.filter((t) => t.id !== id);
+      updateServerTodos(newTodos);
       return newTodos;
     });
   }, [id]);
