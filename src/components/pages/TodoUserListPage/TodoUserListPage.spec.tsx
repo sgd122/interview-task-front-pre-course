@@ -5,6 +5,7 @@ import { LayoutRecoil } from '@/components/layout';
 import TodoUserListPage from '@/components/pages/TodoUserListPage/index';
 import { useFilter } from '@/hooks/useFilter';
 import type { Todo } from '@/types/todo';
+import { updateServerTodos } from '@/utils/client/updateServerTodos';
 
 /**
  * ✅ Recoil의 초기 상태를 설정하는 함수 (항상 `RecoilRoot` 포함)
@@ -21,6 +22,10 @@ jest.mock('@/hooks/useFilter', () => ({
   useFilter: jest.fn(),
 }));
 
+jest.mock('@/utils/client/updateServerTodos', () => ({
+  updateServerTodos: jest.fn(), // ✅ Jest의 Mock 함수로 대체
+}));
+
 describe('TodoUserListPage', () => {
   let mockSetFilter: jest.Mock;
   let rerenderComponent: (ui: React.ReactElement) => void;
@@ -30,6 +35,10 @@ describe('TodoUserListPage', () => {
     { id: 3, text: '할 일 3(완료)', completed: true },
   ];
 
+  beforeAll(() => {
+    window.alert = jest.fn(); // ✅ `window.alert`를 Mock 함수로 대체
+  });
+
   beforeEach(() => {
     // ✅ Mock 함수 생성하여 `useFilter`의 반환 값을 설정
     mockSetFilter = jest.fn();
@@ -37,6 +46,11 @@ describe('TodoUserListPage', () => {
       filter: 'all',
       setFilter: mockSetFilter,
     });
+
+    // NOTE: 서버와의 통신 제거
+    (updateServerTodos as jest.Mock).mockImplementation(() =>
+      Promise.resolve()
+    );
 
     // ✅ `customRender` 실행 후 `rerender` 함수 가져오기
     const { rerender } = customRender(<TodoUserListPage />, {
@@ -79,6 +93,45 @@ describe('TodoUserListPage', () => {
 
   test('📌 `TodoInput`이 정상적으로 렌더링되는지 확인', () => {
     expect(screen.getByRole('textbox')).toBeInTheDocument();
+  });
+
+  test('📌 처리가 안된 `할 일`은 10개가 넘어가지 않는지 확인', () => {
+    (useFilter as jest.Mock).mockReturnValue({
+      filter: 'todo', // ✅ 미완료 항목만 렌더링해야 함
+      setFilter: mockSetFilter,
+    });
+
+    // ✅ `rerenderComponent` 사용하여 `RecoilRoot` 유지한 채 재렌더링
+    rerenderComponent(
+      <LayoutRecoil initialTodos={initialState}>
+        <TodoUserListPage />
+      </LayoutRecoil>
+    );
+
+    const todoTexts = [
+      'study react1',
+      'study react2',
+      'study react3',
+      'study react4',
+      'study react5',
+      'study react6',
+      'study react7',
+      'study react8',
+      'study react9',
+      'study react10',
+      'study react11',
+      'study react12',
+    ];
+
+    todoTexts.forEach((text) => {
+      const input = screen.getByPlaceholderText(
+        '할 일을 입력해 주세요'
+      ) as HTMLInputElement;
+      fireEvent.change(input, { target: { value: text } });
+      fireEvent.keyDown(input, { key: 'Enter' });
+    });
+    const listItems = screen.getAllByRole('list-item');
+    expect(listItems).toHaveLength(10);
   });
 
   test('📌 `TodoList` 컴포넌트가 필터에 따라 렌더링되는지 확인', () => {
