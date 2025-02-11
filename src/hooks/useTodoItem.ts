@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import { useSetRecoilState } from 'recoil';
 
+import { MAX_UNDONE_TODOS } from '@/constants/todo';
 import { todoListState } from '@/states/todoState';
 import type { Todo } from '@/types/todo';
 import { updateServerTodos } from '@/utils/client/updateServerTodos';
@@ -33,8 +34,10 @@ export const useTodoItem = ({ id, completed }: Todo) => {
       const undoneCount = newTodos.filter((todo) => !todo.completed).length;
 
       // ✅ 완료 → 미완료 변경 시 개수 제한 적용
-      if (completed && undoneCount > 10) {
-        alert('처리가 안된 할 일은 최대 10개까지만 유지할 수 있습니다.');
+      if (completed && undoneCount > MAX_UNDONE_TODOS) {
+        alert(
+          `처리가 안된 할 일은 최대 ${MAX_UNDONE_TODOS}개까지만 유지할 수 있습니다.`
+        );
         return prev; // 변경 취소
       }
 

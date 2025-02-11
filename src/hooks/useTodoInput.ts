@@ -1,11 +1,9 @@
 import { useCallback, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
+import { MAX_LENGTH, MAX_UNDONE_TODOS } from '@/constants/todo';
 import { todoListState } from '@/states/todoState';
 import { updateServerTodos } from '@/utils/client/updateServerTodos';
-
-const MAX_LENGTH = 20;
-const MAX_UNDONE_TODOS = 10; // ✅ 미완료 할 일 최대 개수
 
 /**
  * 📌 `useTodoInput` 커스텀 훅
